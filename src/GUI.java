@@ -10,6 +10,8 @@ public class GUI implements ActionListener {
     ActionListener guiUpdate;
     JFrame frame;
     JPanel panel;
+    JPanel stats;
+    JLabel buildCost;
     JLabel numCookies;
     JButton cookiesButton;
     JButton buyButton;
@@ -23,6 +25,7 @@ public class GUI implements ActionListener {
         guiUpdate = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 numCookies.setText("Cookies:" + game.cookies);
+                buildCost.setText("Build Cost: " + game.multiplier.getPrice());
             }
         };
         updateTimer = new Timer(500,guiUpdate);
@@ -38,18 +41,24 @@ public class GUI implements ActionListener {
         buyButton2.setPreferredSize(new Dimension(200, 200));
         buyButton2.addActionListener(e -> buttonClick("buy2"));
 
-        numCookies = new JLabel("Cookies:");
+        numCookies = new JLabel("Cookies:" + game.cookies);
         numCookies.setPreferredSize(new Dimension(200, 200));
-
+        buildCost = new JLabel("Build Cost: "+ (int) game.multiplier.getPrice());
+        buildCost.setPreferredSize(new Dimension(200, 200));
 
         panel = new JPanel();
-        panel.add(numCookies);
+        stats = new JPanel();
+        stats.setLayout(new BoxLayout(stats,BoxLayout.Y_AXIS));
+        stats.add(buildCost);
+        stats.add(numCookies);
+        stats.setSize(200, 200);
+        panel.add(stats);
         panel.add(cookiesButton);
         panel.add(buyButton);
         panel.add(buyButton2);
         panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         panel.setLayout(new GridLayout(1,5));
-        panel.setSize(600,200);
+        panel.setSize(800,200);
 
         frame.setSize(800, 600);
         frame.setLayout(new BorderLayout());
@@ -68,11 +77,13 @@ public class GUI implements ActionListener {
             game.click();
             numCookies.setText("Cookies:" + game.cookies);
         } else if (button.equals("buy")) {
+            buildCost.setText("Build Cost:" + game.multiplier.getPrice());
             if (!game.buyBuilding("bdlg1")) {
                 //create error box
                 JOptionPane.showMessageDialog(frame, "Not enough cookies");
             }
         } else if (button.equals("buy2")) {
+            buildCost.setText("Build Cost:" + game.multiplier.getPrice());
             if (!game.buyBuilding("bdlg2")) {
                 //create error box
                 JOptionPane.showMessageDialog(frame, "Not enough cookies");

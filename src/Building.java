@@ -21,3 +21,17 @@ public class Building {
         return price;
     }
 }
+
+class Multiplier extends Building {
+
+    public Multiplier(String name, int baseCost) {
+        super(name, baseCost);
+    }
+}
+
+class Autoclicker extends Building {
+
+    public Autoclicker(String name, int baseCost) {
+        super(name, baseCost);
+    }
+}
