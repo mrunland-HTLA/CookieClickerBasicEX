@@ -1,5 +1,6 @@
 import org.jetbrains.annotations.NotNull;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -45,6 +46,19 @@ public class GUI implements ActionListener {
         numCookies.setPreferredSize(new Dimension(200, 200));
         buildCost = new JLabel("Build Cost: "+ (int) game.multiplier.getPrice());
         buildCost.setPreferredSize(new Dimension(200, 200));
+
+
+        try {
+            Image img = ImageIO.read(getClass().getResource("cookie_640_629.png"));
+            ImageIcon cookieIcon = new ImageIcon(img);
+            ImageIcon icon = new ImageIcon("cookie_640_629.png");
+            cookiesButton.setIcon(cookieIcon);
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+
+
+
 
         panel = new JPanel();
         stats = new JPanel();
